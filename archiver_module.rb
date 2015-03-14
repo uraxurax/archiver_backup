@@ -6,9 +6,7 @@ module ArchiverModule
   def try_archive (url)
     archived_url = nil
     if need_archive? url
-      save_url = 'http://web.archive.org/save/' + url
-      res = open(save_url)
-      archived_url = get_archived_url(res, url)
+      archived_url = get_archived_url(url)
     end
     archived_url
   end
@@ -27,6 +25,16 @@ module ArchiverModule
   end
 
   def get_archived_url (res, url)
+    save_url = 'http://web.archive.org/save/' + url
+    res = open(save_url)
+    code, message = res.status #res.status => ["200", "OK"]
+
+    until code == '200'
+      puts "OMG!! #{code} #{message} url = #{save_url}"
+      sleep(60)
+      res = open(save_url)
+      code, message = res.status #res.status => ["200", "OK"]
+    end
     archived_url = nil
     res.each {|line|
       if line.include?(url) && line.include?("var redirUrl")
@@ -41,6 +49,15 @@ module ArchiverModule
   def get_archived_timestamp (url)
     json_url = 'http://archive.org/wayback/available?url=' + url
     res = open(json_url)
+    code, message = res.status #res.status => ["200", "OK"]
+
+    until code == '200'
+      puts "OMG!! #{code} #{message} url = #{json_url}"
+      sleep(60)
+      res = open(json_url)
+      code, message = res.status #res.status => ["200", "OK"]
+    end
+    
     list = JSON.parse(res.read)
     timestamp = list["archived_snapshots"]["closest"]["timestamp"] rescue nil
     if timestamp != nil
