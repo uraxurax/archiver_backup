@@ -4,6 +4,7 @@ require 'json'
 module ArchiverModule
   public
   def try_archive (url)
+    puts "try_archive #{url}"
     archived_url = nil
     if need_archive? url
       archived_url = get_archived_url(url)
@@ -26,15 +27,8 @@ module ArchiverModule
 
   def get_archived_url (url)
     save_url = 'http://web.archive.org/save/' + url
-    res = open(save_url)
-    code, message = res.status #res.status => ["200", "OK"]
+    res = retry_open(save_url)
 
-    until code == '200'
-      puts "OMG!! #{code} #{message} url = #{save_url}"
-      sleep(60)
-      res = open(save_url)
-      code, message = res.status #res.status => ["200", "OK"]
-    end
     archived_url = nil
     res.each {|line|
       if line.include?(url) && line.include?("var redirUrl")
@@ -48,15 +42,7 @@ module ArchiverModule
   
   def get_archived_timestamp (url)
     json_url = 'http://archive.org/wayback/available?url=' + url
-    res = open(json_url)
-    code, message = res.status #res.status => ["200", "OK"]
-
-    until code == '200'
-      puts "OMG!! #{code} #{message} url = #{json_url}"
-      sleep(60)
-      res = open(json_url)
-      code, message = res.status #res.status => ["200", "OK"]
-    end
+    res = retry_open(json_url)
     
     list = JSON.parse(res.read)
     timestamp = list["archived_snapshots"]["closest"]["timestamp"] rescue nil
@@ -64,5 +50,28 @@ module ArchiverModule
       timestamp = Time.parse(timestamp).strftime("%Y-%m-%d %H:%M:%S UTC")
     end
     timestamp
+  end
+  def retry_open(url)
+    res = rescue_open(url)
+    code, message = res.status #res.status => ["200", "OK"]
+
+    until code == '200'
+      puts "OMG!! #{code} #{message} url = #{json_url}"
+      sleep(60)
+      res = rescue_open(url)
+      code, message = res.status #res.status => ["200", "OK"]
+    end
+    res
+  end
+  
+  def rescue_open(url)
+    res = open(url)
+  rescue => e
+    print "error raise in rescue: "
+    p e
+    print "url = #{url}"
+    retry
+  ensure
+    res
   end
 end
