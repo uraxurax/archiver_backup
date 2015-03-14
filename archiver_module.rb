@@ -24,7 +24,7 @@ module ArchiverModule
     need_archive
   end
 
-  def get_archived_url (res, url)
+  def get_archived_url (url)
     save_url = 'http://web.archive.org/save/' + url
     res = open(save_url)
     code, message = res.status #res.status => ["200", "OK"]
