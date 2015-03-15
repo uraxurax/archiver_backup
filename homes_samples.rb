@@ -23,7 +23,7 @@ pref_list.each{|pref|
   pref_prop_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_prop_list_#{date.to_s}.txt"
   pref_arch_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_arch_list_#{date.to_s}.txt"
   
-  city_list = get_city_list(pref)
+  city_list = homes_archiver.get_city_list(pref)
   city_list.each{|city|
     puts city
     arch_urls = []
