@@ -1,0 +1,37 @@
+/Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:352:in `open_http': 502 Bad Gateway (OpenURI::HTTPError)
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:723:in `buffer_open'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:210:in `block in open_loop'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:208:in `catch'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:208:in `open_loop'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:149:in `open_uri'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:703:in `open'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:34:in `open'
+	from /Users/hiro/dev/tochi/project/archiver/archiver_module.rb:10:in `try_archive'
+	from samples_saitama.rb:58:in `block (3 levels) in <main>'
+	from samples_saitama.rb:57:in `each'
+	from samples_saitama.rb:57:in `block (2 levels) in <main>'
+	from samples_saitama.rb:52:in `each'
+	from samples_saitama.rb:52:in `block in <main>'
+	from samples_saitama.rb:47:in `each'
+	from samples_saitama.rb:47:in `<main>'
+saitama_nishi
+/Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:352:in `open_http': 502 Bad Gateway (OpenURI::HTTPError)
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:723:in `buffer_open'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:210:in `block in open_loop'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:208:in `catch'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:208:in `open_loop'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:149:in `open_uri'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:703:in `open'
+	from /Users/hiro/.rvm/rubies/ruby-2.2.0-preview1/lib/ruby/2.2.0/open-uri.rb:34:in `open'
+	from /Users/hiro/dev/tochi/project/archiver/archiver_module.rb:10:in `try_archive'
+	from samples_saitama.rb:58:in `block (3 levels) in <main>'
+	from samples_saitama.rb:57:in `each'
+	from samples_saitama.rb:57:in `block (2 levels) in <main>'
+	from samples_saitama.rb:52:in `each'
+	from samples_saitama.rb:52:in `block in <main>'
+	from samples_saitama.rb:47:in `each'
+	from samples_saitama.rb:47:in `<main>'
+saitama_nishi
+prop_urls.length() = 270
+arch_urls.length() = 259
+saitama_kita
