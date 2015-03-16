@@ -303,7 +303,8 @@ class SuumoArchiver
         links = page.links()
         links.each{|link|
           if /^#{base_url}nc_\d*?\/$/ =~ link.to_s
-            prop_urls.push(link.to_s)
+            https_links = link.to_s.gsub('http://', 'https://')
+            prop_urls.push(https_links)
           end
       }
       end
