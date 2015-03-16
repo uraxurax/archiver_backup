@@ -19,7 +19,7 @@ suumo_archiver = SuumoArchiver.new(opts)
 
 date = Date::today
 
-puts "site:#{site} time:#{Time().now().to_s} start"
+puts "site:#{site} time:#{Time.now().to_s} start"
 
 pref_list.each{|pref|
   pref_prop_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_prop_list_#{date.to_s}.txt"
@@ -55,4 +55,4 @@ pref_list.each{|pref|
   }
 }
 
-puts "site:#{site} time:#{Time().now().to_s} end"
+puts "site:#{site} time:#{Time.now().to_s} end"
