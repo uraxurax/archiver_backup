@@ -82,33 +82,3 @@ data_lists.each { |pref_cities|
   }
   puts 
 }
-=begin
-
-list_pages.each {|list_page|
-  puts ''
-  Anemone.crawl(list_page, opts) do |anemone|
-    anemone.on_every_page do |page|
-      links = page.links()
-      links.each{|link|
-        if /http:\/\/suumo.jp\/tochi\/(.*?\/sc_.*?)\// =~ link.to_s
-          link_parts = $1
-          if /sc_(.*)/ =~ link_parts
-            city = $1
-            if (city.length() > max_length)
-              max_length = city.length()
-            end
-            print(":" + city)
-            space_count = length - city.length()
-            space_count.times {
-              print(" ")
-            }
-            print(" => \"")
-            puts link_parts + "\","
-          end
-        end
-      }
-    end
-  end
-#  puts max_length
-}
-=end
