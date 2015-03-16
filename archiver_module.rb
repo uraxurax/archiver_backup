@@ -28,17 +28,18 @@ module ArchiverModule
 
   def get_archived_url (url)
     save_url = 'http://web.archive.org/save/' + url
-    res = retry_open(save_url)
-    uri = URI(url)
-    
     archived_url = nil
-    res.each {|line|
-      if line.include?(uri.host) && line.include?("var redirUrl")
-        if /"(\/web\/.+?)"/ =~ line
-          archived_url = 'https://web.archive.org' + $1
+    res = retry_open(save_url)
+    if res != nil
+      uri = URI(url)
+      res.each {|line|
+        if line.include?(uri.host) && line.include?("var redirUrl")
+          if /"(\/web\/.+?)"/ =~ line
+            archived_url = 'https://web.archive.org' + $1
+          end
         end
-      end
-    }
+      }
+    end
     archived_url
   end
   
@@ -55,24 +56,35 @@ module ArchiverModule
   end
   def retry_open(url)
     res = rescue_open(url)
-    code, message = res.status #res.status => ["200", "OK"]
-
-    until code == '200'
-      puts "OMG!! #{code} #{message} url = #{json_url}"
-      sleep(60)
-      res = rescue_open(url)
+    if res != nil
       code, message = res.status #res.status => ["200", "OK"]
+      
+      until code == '200'
+        puts "OMG!! #{code} #{message} url = #{json_url}"
+        sleep(60)
+        res = rescue_open(url)
+        code, message = res.status #res.status => ["200", "OK"]
+      end
     end
     res
   end
   
   def rescue_open(url)
     res = open(url)
+  rescue OpenURI::HTTPError => e
+    print "error raise in rescue: "
+    p e
+    print "url = #{url}\n"
+    the_status = e.io.status[0]
+    unless the_status.to_i == 404 then
+      retry
+    else
+      res = nil
+    end
   rescue => e
     print "error raise in rescue: "
     p e
     print "url = #{url}"
-    retry
   ensure
     res
   end
