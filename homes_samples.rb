@@ -29,13 +29,7 @@ pref_list.each{|pref|
     arch_urls = []
     
     prop_urls = homes_archiver.get_prop_urls_from_city(city)
-    prop_urls.each{|prop_url|
-      archived_url = try_archive(prop_url)
-      unless archived_url == nil
-        arch_urls.push(archived_url) 
-        sleep(1)
-      end
-    }
+
     puts "prop_urls.length() = " + prop_urls.length().to_s
     File.open(pref_prop_file, "a") do |file|
       file.write(city.to_s + ":" + Time.now().to_s + "\n")
@@ -43,6 +37,13 @@ pref_list.each{|pref|
         file.write(prop_url + "\n")
       }
     end
+    prop_urls.each{|prop_url|
+      archived_url = try_archive(prop_url)
+      unless archived_url == nil
+        arch_urls.push(archived_url) 
+        sleep(1)
+      end
+    }
     puts "arch_urls.length() = " + arch_urls.length().to_s
     File.open(pref_arch_file, "a") do |file|
       file.write(city.to_s + ":" + Time.now().to_s + "\n")

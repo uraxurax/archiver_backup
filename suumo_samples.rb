@@ -24,11 +24,17 @@ pref_list.each{|pref|
   pref_arch_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_arch_list_#{date.to_s}.txt"
 
   city_list = suumo_archiver.get_city_list(pref)
-  p city_list
   city_list.each{|city|
     arch_urls = []
     
     prop_urls = suumo_archiver.get_prop_urls_from_city(city)
+    puts "prop_urls.length() = " + prop_urls.length().to_s
+    File.open(pref_prop_file, "a") do |file|
+      file.write(city.to_s + ":" + Time.now().to_s + "\n")
+      prop_urls.each{ |prop_url|
+        file.write(prop_url + "\n")
+      }
+    end
     prop_urls.each{|prop_url|
       archived_url = try_archive(prop_url)
       unless archived_url == nil
@@ -36,5 +42,12 @@ pref_list.each{|pref|
         sleep(1)
       end
     }
+    puts "arch_urls.length() = " + arch_urls.length().to_s
+    File.open(pref_arch_file, "a") do |file|
+      file.write(city.to_s + ":" + Time.now().to_s + "\n")
+      arch_urls.each{ |arch_url|
+        file.write(arch_url + "\n")
+      }
+    end    
   }
 }
