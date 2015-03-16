@@ -12,7 +12,7 @@ opts = {
 }
 
 
-pref_list = [:tokyo]
+pref_list = [:saitama]
 site = "suumo"
 
 suumo_archiver = SuumoArchiver.new(opts)
@@ -23,7 +23,6 @@ pref_list.each{|pref|
   pref_prop_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_prop_list_#{date.to_s}.txt"
   pref_arch_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_arch_list_#{date.to_s}.txt"
 
-  
   city_list = suumo_archiver.get_city_list(pref)
   p city_list
   city_list.each{|city|
