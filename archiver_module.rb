@@ -1,3 +1,4 @@
+require 'uri'
 require 'open-uri'
 require 'json'
 
@@ -28,10 +29,11 @@ module ArchiverModule
   def get_archived_url (url)
     save_url = 'http://web.archive.org/save/' + url
     res = retry_open(save_url)
-
+    uri = URI(url)
+    
     archived_url = nil
     res.each {|line|
-      if line.include?(url) && line.include?("var redirUrl")
+      if line.include?(uri.host) && line.include?("var redirUrl")
         if /"(\/web\/.+?)"/ =~ line
           archived_url = 'https://web.archive.org' + $1
         end
