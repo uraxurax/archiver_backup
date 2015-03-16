@@ -18,6 +18,7 @@ homes_archiver = HomesArchiver.new(opts)
 
 date = Date::today
 
+puts "site:#{site} time:#{Time().now().to_s} start"
 
 pref_list.each{|pref|
   pref_prop_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_prop_list_#{date.to_s}.txt"
@@ -53,7 +54,5 @@ pref_list.each{|pref|
     end
   }
 }
-#end
-#File.open(stderr_file, "a") do |file|
-#  file.write(cstderr)
-#end
+
+puts "site:#{site} time:#{Time().now().to_s} end"
