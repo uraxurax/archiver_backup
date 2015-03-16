@@ -19,12 +19,15 @@ suumo_archiver = SuumoArchiver.new(opts)
 
 date = Date::today
 
+puts "site:#{site} time:#{Time().now().to_s} start"
+
 pref_list.each{|pref|
   pref_prop_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_prop_list_#{date.to_s}.txt"
   pref_arch_file = "#{File.expand_path('../data',__FILE__)}/#{site}_#{pref.to_s}_arch_list_#{date.to_s}.txt"
 
   city_list = suumo_archiver.get_city_list(pref)
   city_list.each{|city|
+    puts city
     arch_urls = []
     
     prop_urls = suumo_archiver.get_prop_urls_from_city(city)
@@ -51,3 +54,5 @@ pref_list.each{|pref|
     end    
   }
 }
+
+puts "site:#{site} time:#{Time().now().to_s} end"
