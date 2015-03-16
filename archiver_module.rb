@@ -77,6 +77,7 @@ module ArchiverModule
     print "url = #{url}\n"
     the_status = e.io.status[0]
     unless the_status.to_i == 404 then
+      sleep 1
       retry
     else
       res = nil
