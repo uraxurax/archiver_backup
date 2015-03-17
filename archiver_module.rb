@@ -72,7 +72,7 @@ module ArchiverModule
   end
   
   def rescue_open(url)
-    int retry_num = 0
+    retry_num = 0
     res = open(url)
     
   rescue OpenURI::HTTPError => e
