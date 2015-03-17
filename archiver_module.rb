@@ -3,6 +3,8 @@ require 'open-uri'
 require 'json'
 
 module ArchiverModule
+  @@retry_max = 10
+  
   public
   def try_archive (url)
     puts "try_archive #{url}"
@@ -70,14 +72,17 @@ module ArchiverModule
   end
   
   def rescue_open(url)
+    int retry_num = 0
     res = open(url)
+    
   rescue OpenURI::HTTPError => e
     print "error raise in rescue: "
     p e
     print "url = #{url}\n"
     the_status = e.io.status[0]
-    unless the_status.to_i == 404 then
+    unless the_status.to_i == 404 && retry_num < @@retry_max then
       sleep 1
+      retry_num = retry_num + 1
       retry
     else
       res = nil
