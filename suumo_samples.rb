@@ -12,7 +12,7 @@ opts = {
 }
 
 
-pref_list = [:tokyo, :kanagawa, :saitama :chiba]
+pref_list = [:tokyo, :kanagawa, :saitama, :chiba]
 site = "suumo"
 
 suumo_archiver = SuumoArchiver.new(opts)
