@@ -66,7 +66,7 @@ class SuumoArchiver
     :oshimashicho        => "tokyo/sc_oshimashicho",
     :oshima              => "tokyo/sc_oshima",
     :toshimamura         => "tokyo/sc_toshimamura",
-    :niijima             => "tokyo/sc_niijima/",
+    :niijima             => "tokyo/sc_niijima",
     :kozushima           => "tokyo/sc_kozushima",
     :miyakeshicho        => "tokyo/sc_miyakeshicho",
     :miyakejimamiyake    => "tokyo/sc_miyakejimamiyake",
